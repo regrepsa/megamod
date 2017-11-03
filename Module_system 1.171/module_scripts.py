@@ -23259,7 +23259,14 @@ scripts = [
                 (store_distance_to_party_from_party, ":dist", "p_main_party", ":ai_object"),
                 (this_or_next|lt, ":dist", 30),
                 (party_slot_eq, ":ai_object", slot_center_has_messenger_post, 1),
-                (call_script, "script_add_notification_menu", "mnu_notification_village_raid_started", ":ai_object", ":troop_no"),
+#                (call_script, "script_add_notification_menu", "mnu_notification_village_raid_started", ":ai_object", ":troop_no"), #F&B disabled
+                #F&B begin
+                (str_store_party_name, s1, ":ai_object"),
+                (str_store_troop_name, s2, ":troop_no"),
+                (store_troop_faction, ":troop_faction", ":troop_no"),
+                (str_store_faction_name, s3, ":troop_faction"),
+                (display_message, "@Your Village is under Attack!^^{s2} of {s3} is laying waste to {s1}.", 0x34c6e4),
+                #F&B end
               (try_end),
             (else_try),
               (party_slot_eq, ":ai_object", slot_village_state, svs_being_raided),
